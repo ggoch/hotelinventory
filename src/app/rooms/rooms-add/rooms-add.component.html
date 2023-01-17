@@ -1,0 +1,34 @@
+<p>Invaild:{{roomsForm.invalid| json}}</p> <!--vaild的相反-->
+<p>Dirty:{{roomsForm.dirty| json}}</p> <!--檢查使用者是否輸入過表單 是回傳true 否回傳false-->
+<p>Vaild:{{roomsForm.valid| json}}</p>
+<p>Pristine:{{roomsForm.pristine| json}}</p> <!--檢查使用者是否沒輸入過表單 是回傳true 否回傳false dirty的相反-->
+<p>Value:{{roomsForm.value| json}}</p>
+
+<form #roomsForm="ngForm" (ngSubmit)="addRoom(roomsForm)">
+    <div class="form-group">
+        <input required class="form-control" type="text" name="roomType" placeholder="RoomType" [(ngModel)]="room.roomType" />
+    </div>
+    <div class="form-group">
+        <input required class="form-control" type="text" name="amenities" placeholder="Amenities" [(ngModel)]="room.amenities" />
+    </div>
+    <div class="form-group">
+        <input required class="form-control" type="number" name="price" placeholder="Price" [(ngModel)]="room.price" />
+    </div>
+    <div class="form-group">
+        <input required class="form-control" type="text" name="photos" placeholder="Photos" minlength="5" maxlength="20" [(ngModel)]="room.photos" />
+    </div>
+    <div class="form-group">
+        <input required class="form-control" type="datetime" name="checkinTime" placeholder="CheckinTime" [(ngModel)]="room.checkinTime" />
+    </div>
+    <div class="form-group">
+        <input required class="form-control" type="datetime" name="checkoutTime" placeholder="CheckoutTime" [(ngModel)]="room.checkoutTime" />
+    </div>
+    <div class="form-group">
+        <input required class="form-control" type="number" name="rating" placeholder="Rating" [(ngModel)]="room.rating" />
+    </div>
+    <div>
+        <button [disabled]="roomsForm.invalid" class="btn btn-primary" type="submit">
+            Submit
+        </button>
+    </div>
+</form>

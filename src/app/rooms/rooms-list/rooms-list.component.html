@@ -1,0 +1,33 @@
+{{title}}:
+  <!-- {{roomList | json}} -->
+  <table class="table">
+    <tr>
+      <th>Index</th>
+      <th>Even/Odd</th>
+      <th>Room Number</th>
+      <th>Room Type</th>
+      <th>Room Price</th>
+      <th>Room Amenities</th>
+      <th>Checkin Time</th>
+      <th>Rating</th>
+      <th>SelectRoom</th>
+    </tr>
+    <tr
+      [ngClass]="e ? 'even' : 'odd'"
+      *ngFor="let room of rooms | fliter:price | slice:0:rooms.length; let e = even; let o = odd; let i = index"
+    >
+      <th>{{ i | percent}}</th>
+      <th>{{ e ? "Even" : "Odd" }}</th>
+      <th>{{ room.roomNumber }}</th>
+      <th>{{ room.roomType }}</th>
+      <th>{{ room.price }}</th>
+      <th>{{ room.amenities | titlecase }}</th>
+      <th>{{ room.checkinTime | date : "short" }}</th>
+      <th>{{ room.rating | number:'1.0-0' }}</th>
+      <th>
+        <!-- <button class="btn btn-primary" (click)="roomSelect(room)">Select</button> -->
+        <!-- <button class="btn btn-primary" [routerLink]="['/rooms',room.roomNumber]">Select</button> -->
+        <button class="btn btn-primary" [routerLink]="['/booking',room.roomNumber]">Select</button>
+      </th>
+    </tr>
+  </table>

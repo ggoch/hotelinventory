@@ -1,0 +1,29 @@
+<ng-container *ngIf="headerComponent">
+  <hinv-header></hinv-header>
+</ng-container>
+<!-- <hinv-header></hinv-header>
+  <hinv-header></hinv-header> -->
+<router-outlet></router-outlet>
+<div>{{rooms$ | async | json}}</div>
+<div [hidden]="hideRooms">
+  <div [innerText]="numberOfRooms"></div>
+  <!-- <hinv-rooms-list [rooms]="roomList" [title]="title" (roomSelected)="selectRoom($event)"></hinv-rooms-list> -->
+</div>
+<div *ngIf="selectedRoom">
+    {{selectedRoom | json}}
+</div>
+<div>
+  <button (click)="addRoom()">Add Rooms</button>
+</div>
+<!-- <div *ngIf="rooms.availableRooms > 0"> -->
+  <div>
+    <input type="number" class="form-control" placeholder="price" [formControl]="priceFliter">
+    {{priceFliter | json}}
+  </div>
+<div *ngIf="!hideRooms">
+  <hinv-rooms-list [rooms]="roomList" [title]="title" [price]="priceFliter.value" (roomSelected)="selectRoom($event)"></hinv-rooms-list>
+</div>
+<h3>{{getError$ | async}}</h3>
+<button (click)="toggle()">toggle</button>
+<button (click)="editRoom()">editRoom</button>
+
