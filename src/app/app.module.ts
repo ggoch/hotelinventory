@@ -28,10 +28,15 @@ import { RouteConfigToken } from './services/routeConfig.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GlobalErrorHandler } from './errorhandler.service';
+import { StyleLoaderService } from './lazy-css.component';
 
 function ininFactory(initService:InitService){
   // return initService.init();
   return () => initService.init();
+}
+
+function routerFactory(service:StyleLoaderService){
+  return () => service.getRouter();
 }
 
 
@@ -82,6 +87,12 @@ function ininFactory(initService:InitService){
       provide:APP_INITIALIZER,
       useFactory:ininFactory,
       deps:[InitService],
+      multi:true
+    },
+    {
+      provide:APP_INITIALIZER,
+      useFactory:routerFactory,
+      deps:[StyleLoaderService],
       multi:true
     },
     {
